@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Aibo</string>
+
+    <!-- Empresas-->
+    <string-array name="empresas">
+        <item>Quala Peru SAC</item>
+        <item>Sony Peru SAC</item>
+        <item>Pucp</item>
+        <item>Construredes</item>
+    </string-array>
+</resources>

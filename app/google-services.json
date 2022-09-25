@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "934676525019",
+    "project_id": "aibo-83c51",
+    "storage_bucket": "aibo-83c51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934676525019:android:d11ea782eb87bc967d81fe",
+        "android_client_info": {
+          "package_name": "com.upc.aiboapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934676525019-a68rpq6f5aaeef2mg1b43pvhjguts9o1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_O6vdRsQ4yOOALMDoxzRvpAw-rMWAmqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934676525019-a68rpq6f5aaeef2mg1b43pvhjguts9o1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,17 +1,25 @@
 package com.upc.aiboapp
 
-import android.R
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.upc.aiboapp.entidad.Usuario
 
 
 class FirebaseStorageManager {
 
-    private val mStorageRef = FirebaseStorage.getInstance().reference
+    private val db= Firebase.database
 
     fun uploadImage(mContext: Context,imageURI: Uri, folder: String){
         val progressDialog = ProgressDialog(mContext)
@@ -31,4 +39,61 @@ class FirebaseStorageManager {
         }
     }
 
+    fun loginUsuario(dni:String,contra:String,correo:String,mContext: Context) {
+        val progressDialog = ProgressDialog(mContext)
+        esperaLogin(progressDialog)
+
+        db.getReference("usuario").orderByChild("dni_ce").equalTo(dni)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        for (dataSnap in dataSnapshot.children) {
+                            val usuario: Usuario? = dataSnap?.getValue(Usuario::class.java)
+
+                            if (contra == usuario?.contrasena && correo == usuario?.email){
+                                if (progressDialog.isShowing) progressDialog.dismiss()
+                                val intent = Intent(mContext, ValidarRegistroActivity::class.java)
+                                startActivity(mContext,intent,null)
+                            }else{
+                                if (progressDialog.isShowing) progressDialog.dismiss()
+                                Toast.makeText(mContext, "Correo o Clave incorrectos", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    }else{
+                        if (progressDialog.isShowing) progressDialog.dismiss()
+                        Toast.makeText(mContext, "Dni no existe", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+    }
+    fun guardarUsuario(primerNombre:String,segundoNombre:String,primerApellido:String,
+                        segundoApellido:String,dni_CE:String,fechaNacimiento:String,email:String,contrasena:String,context: Context){
+        val referencia=db.getReference("usuario")
+
+        val usuario=Usuario(primerNombre,segundoNombre,primerApellido,segundoApellido,dni_CE,fechaNacimiento,email,contrasena)
+        referencia.child(referencia.push().key.toString()).setValue(usuario).addOnCompleteListener{
+            mostrarMensajeRegistro(context)
+
+        }.addOnFailureListener{
+                err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun mostrarMensajeRegistro(context: Context){
+        val ventana = AlertDialog.Builder(context)
+        ventana.setTitle("Mensaje informativo")
+        ventana.setMessage("Se registro correctamente")
+        ventana.setPositiveButton("Aceptar"){ dialog, which ->
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(context,intent,null)
+        }
+        ventana.create().show()
+    }
+    private fun esperaLogin(progressDialog:ProgressDialog){
+        progressDialog.setMessage("Ingresando...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+    }
 }

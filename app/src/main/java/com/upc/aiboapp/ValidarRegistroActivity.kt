@@ -98,18 +98,23 @@ class ValidarRegistroActivity : AppCompatActivity() {
         if (this::imgDniCaraUri.isInitialized&&this::imgDniSelloUri.isInitialized&&
             this::imgBol1Uri.isInitialized&&this::imgBol2Uri.isInitialized&&this::imgBol3Uri.isInitialized){
 
-            storageManager.uploadImage(this,imgDniCaraUri,"Dni_Cara")
-            storageManager.uploadImage(this,imgDniSelloUri,"Dni_Sello")
-            storageManager.uploadImage(this,imgBol1Uri,"Boleta_1")
-            storageManager.uploadImage(this,imgBol2Uri,"Boleta_2")
-            storageManager.uploadImage(this,imgBol3Uri,"Boleta_3")
+            val dniUser: String? =getIntent().getStringExtra("dni")
+            if (dniUser != null) {
+                storageManager.uploadImage(this,imgDniCaraUri,"Dni_Cara", dniUser)
+                storageManager.uploadImage(this,imgDniSelloUri,"Dni_Sello",dniUser)
+                storageManager.uploadImage(this,imgBol1Uri,"Boleta_1",dniUser)
+                storageManager.uploadImage(this,imgBol2Uri,"Boleta_2",dniUser)
+                storageManager.uploadImage(this,imgBol3Uri,"Boleta_3",dniUser)
 
-            //eliminamos las ftoso subidas al storage del celular
-            File(getFilePath(imgDniCaraUri)).delete()
-            File(getFilePath(imgDniSelloUri)).delete()
-            File(getFilePath(imgBol1Uri)).delete()
-            File(getFilePath(imgBol2Uri)).delete()
-            File(getFilePath(imgBol3Uri)).delete()
+                //eliminamos las ftoso subidas al storage del celular
+                File(getFilePath(imgDniCaraUri)).delete()
+                File(getFilePath(imgDniSelloUri)).delete()
+                File(getFilePath(imgBol1Uri)).delete()
+                File(getFilePath(imgBol2Uri)).delete()
+                File(getFilePath(imgBol3Uri)).delete()
+            } else{
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
+            }
         }else{
             Toast.makeText(this, "Falta llenar imagenes", Toast.LENGTH_LONG).show()
         }

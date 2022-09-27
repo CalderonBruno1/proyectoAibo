@@ -4,6 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
@@ -21,13 +22,13 @@ class FirebaseStorageManager {
 
     private val db= Firebase.database
 
-    fun uploadImage(mContext: Context,imageURI: Uri, folder: String){
+    fun uploadImage(mContext: Context,imageURI: Uri, folder: String,dni:String){
         val progressDialog = ProgressDialog(mContext)
         progressDialog.setMessage("Uploading File")
         progressDialog.setCancelable(false)
         progressDialog.show()
 
-        val Folder: StorageReference =FirebaseStorage.getInstance().getReference().child(folder) //crea folder en firebase storage
+        val Folder: StorageReference =FirebaseStorage.getInstance().getReference().child(dni).child(folder) //crea folder en firebase storage
         val filename: StorageReference =Folder.child("imagen"+imageURI!!.lastPathSegment)//crea el child del folder en firebase storage
 
         filename.putFile(imageURI).addOnSuccessListener {//sube la foto del url dado dentro del cel, en la ubicacion dada en filename en firebase
@@ -53,6 +54,7 @@ class FirebaseStorageManager {
                             if (contra == usuario?.contrasena && correo == usuario?.email){
                                 if (progressDialog.isShowing) progressDialog.dismiss()
                                 val intent = Intent(mContext, ValidarRegistroActivity::class.java)
+                                intent.putExtra("dni",dni)
                                 startActivity(mContext,intent,null)
                             }else{
                                 if (progressDialog.isShowing) progressDialog.dismiss()

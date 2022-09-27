@@ -11,12 +11,12 @@ import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.util.*
 
 
 class ValidarRegistroActivity : AppCompatActivity() {
@@ -95,18 +95,24 @@ class ValidarRegistroActivity : AppCompatActivity() {
     }
 
     private fun uploadImage(){
-        storageManager.uploadImage(this,imgDniCaraUri,"Dni_Cara")
-        storageManager.uploadImage(this,imgDniSelloUri,"Dni_Sello")
-        storageManager.uploadImage(this,imgBol1Uri,"Boleta_1")
-        storageManager.uploadImage(this,imgBol2Uri,"Boleta_2")
-        storageManager.uploadImage(this,imgBol3Uri,"Boleta_3")
+        if (this::imgDniCaraUri.isInitialized&&this::imgDniSelloUri.isInitialized&&
+            this::imgBol1Uri.isInitialized&&this::imgBol2Uri.isInitialized&&this::imgBol3Uri.isInitialized){
 
-        //eliminamos las ftoso subidas al storage del celular
-        File(getFilePath(imgDniCaraUri)).delete()
-        File(getFilePath(imgDniSelloUri)).delete()
-        File(getFilePath(imgBol1Uri)).delete()
-        File(getFilePath(imgBol2Uri)).delete()
-        File(getFilePath(imgBol3Uri)).delete()
+            storageManager.uploadImage(this,imgDniCaraUri,"Dni_Cara")
+            storageManager.uploadImage(this,imgDniSelloUri,"Dni_Sello")
+            storageManager.uploadImage(this,imgBol1Uri,"Boleta_1")
+            storageManager.uploadImage(this,imgBol2Uri,"Boleta_2")
+            storageManager.uploadImage(this,imgBol3Uri,"Boleta_3")
+
+            //eliminamos las ftoso subidas al storage del celular
+            File(getFilePath(imgDniCaraUri)).delete()
+            File(getFilePath(imgDniSelloUri)).delete()
+            File(getFilePath(imgBol1Uri)).delete()
+            File(getFilePath(imgBol2Uri)).delete()
+            File(getFilePath(imgBol3Uri)).delete()
+        }else{
+            Toast.makeText(this, "Falta llenar imagenes", Toast.LENGTH_LONG).show()
+        }
     }
 
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){

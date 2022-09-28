@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/drawable/round_style.xml" value="0.2115" />
-        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_aceptado.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_espera.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_rechazado.xml" value="0.25" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_registrar.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_validar_registro.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_validar_registro.xml" value="0.33" />
       </map>
     </option>
   </component>

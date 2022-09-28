@@ -4,9 +4,9 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -53,9 +53,27 @@ class FirebaseStorageManager {
 
                             if (contra == usuario?.contrasena && correo == usuario?.email){
                                 if (progressDialog.isShowing) progressDialog.dismiss()
-                                val intent = Intent(mContext, ValidarRegistroActivity::class.java)
-                                intent.putExtra("dni",dni)
-                                startActivity(mContext,intent,null)
+
+                                if (usuario.validacion=="espera"){
+                                    val intent = Intent(mContext, EsperaActivity::class.java)
+                                    startActivity(mContext,intent,null)
+                                }else if(usuario.validacion=="rechazado"){
+                                    val intent = Intent(mContext, RechazadoActivity::class.java)
+                                    startActivity(mContext,intent,null)
+                                }else if(usuario.validacion=="aceptado"){
+                                    val intent = Intent(mContext, AceptadoActivity::class.java)
+                                    intent.putExtra("dni",dni)
+                                    startActivity(mContext,intent,null)
+                                }else if(usuario.validacion=="nuevo"){
+                                    val intent = Intent(mContext, ValidarRegistroActivity::class.java)
+                                    intent.putExtra("dni",dni)
+                                    startActivity(mContext,intent,null)
+                                }else if(usuario.validacion=="confirmado"){
+                                    val intent = Intent(mContext, ValidarRegistroActivity::class.java)
+                                    intent.putExtra("dni",dni)
+                                    startActivity(mContext,intent,null)
+                                }
+
                             }else{
                                 if (progressDialog.isShowing) progressDialog.dismiss()
                                 Toast.makeText(mContext, "Correo o Clave incorrectos", Toast.LENGTH_LONG).show()
@@ -97,5 +115,19 @@ class FirebaseStorageManager {
         progressDialog.setMessage("Ingresando...")
         progressDialog.setCancelable(false)
         progressDialog.show()
+    }
+
+    fun setValidacionUsser(dni:String,context: Context, validacion:String){
+        db.getReference("usuario").orderByChild("dni_ce").equalTo(dni)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (userSnapshot in dataSnapshot.children) {
+                    userSnapshot.ref.child("validacion").setValue(validacion)
+                    val intent = Intent(context, LoginActivity::class.java)
+                    startActivity(context, intent, null)
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
     }
 }

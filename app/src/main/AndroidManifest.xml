@@ -18,6 +18,15 @@
         android:theme="@style/Theme.Aiboapp"
         tools:targetApi="31">
         <activity
+            android:name=".AceptadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RechazadoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EsperaActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -28,7 +37,7 @@
         </activity>
         <activity
             android:name=".RegistrarActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ValidarRegistroActivity"
             android:exported="false" />

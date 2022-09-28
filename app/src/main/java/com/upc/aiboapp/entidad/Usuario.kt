@@ -2,7 +2,7 @@ package com.upc.aiboapp.entidad
 
 class Usuario(primerNombre:String="", segundoNombre:String="", primerApellido:String="",
               segundoApellido:String="", dni_ce:String="", fechaNac:String="", email:String="",
-              contrasena:String="") {
+              contrasena:String="", validacion:String="nuevo") {
     var primerNombre: String=primerNombre
     var segundoNombre: String=segundoNombre
     var primerApellido: String=primerApellido
@@ -11,4 +11,5 @@ class Usuario(primerNombre:String="", segundoNombre:String="", primerApellido:St
     var fechaNac: String=fechaNac
     var email: String=email
     var contrasena: String=contrasena
+    var validacion: String=validacion
 }

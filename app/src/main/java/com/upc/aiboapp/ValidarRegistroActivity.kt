@@ -112,6 +112,8 @@ class ValidarRegistroActivity : AppCompatActivity() {
                 File(getFilePath(imgBol1Uri)).delete()
                 File(getFilePath(imgBol2Uri)).delete()
                 File(getFilePath(imgBol3Uri)).delete()
+
+                storageManager.setValidacionUsser(dniUser,this,"espera")
             } else{
                 Toast.makeText(this, "Error", Toast.LENGTH_LONG).show()
             }

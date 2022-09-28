@@ -251,6 +251,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="Enviar"
+        android:background="@color/aiboBlue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2" />

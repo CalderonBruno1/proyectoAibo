@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Aiboapp"
         tools:targetApi="31">
         <activity
+            android:name=".SimulacionActivity"
+            android:exported="false" />
+        <activity
             android:name=".AceptadoActivity"
             android:exported="false" />
         <activity

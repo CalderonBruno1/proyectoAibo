@@ -26,6 +26,11 @@
             android:name=".LocalizacionActivity"
             android:exported="false" />
         <activity
+            android:name=".SimulacionActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
             android:name=".AceptadoActivity"
             android:exported="false" />
         <activity

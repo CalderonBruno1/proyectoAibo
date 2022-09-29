@@ -24,6 +24,9 @@ class AceptadoActivity : AppCompatActivity() {
             if (dniUser != null) {
                 storageManager.setValidacionUsser(dniUser,this,"confirmado")
             }
+
+            val intent = Intent(baseContext, SimulacionActivity::class.java)
+            startActivity(intent)
         }
     }
 }

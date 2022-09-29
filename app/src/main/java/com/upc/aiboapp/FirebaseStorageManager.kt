@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.content.contentValuesOf
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -15,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.upc.aiboapp.entidad.Prestamos
 import com.upc.aiboapp.entidad.Usuario
 
 
@@ -69,7 +71,7 @@ class FirebaseStorageManager {
                                     intent.putExtra("dni",dni)
                                     startActivity(mContext,intent,null)
                                 }else if(usuario.validacion=="confirmado"){
-                                    val intent = Intent(mContext, ValidarRegistroActivity::class.java)
+                                    val intent = Intent(mContext, SimulacionActivity::class.java)
                                     intent.putExtra("dni",dni)
                                     startActivity(mContext,intent,null)
                                 }
@@ -99,6 +101,30 @@ class FirebaseStorageManager {
         }.addOnFailureListener{
                 err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
         }
+    }
+
+    fun ingresarSolicitudPrestamo(sueldo:String, monto:String, cuotas:String,
+                                  interes:String, estado:String, context: Context){
+        val referencia=db.getReference("prestamos")
+
+        val prestamo = Prestamos(sueldo, monto, cuotas, interes, estado)
+        referencia.child(referencia.push().key.toString()).setValue(prestamo).addOnCompleteListener {
+            mostrarMensajeSolicitud(context)
+        }.addOnFailureListener{
+            err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+    private fun mostrarMensajeSolicitud(context: Context){
+        val ventana = AlertDialog.Builder(context)
+        ventana.setTitle("Mensaje informativo")
+        ventana.setMessage("Se registro correctamente")
+        ventana.setPositiveButton("Aceptar"){ dialog, which ->
+            val intent = Intent(context, LoginActivity::class.java)
+            startActivity(context,intent,null)
+        }
+        ventana.create().show()
     }
 
     private fun mostrarMensajeRegistro(context: Context){

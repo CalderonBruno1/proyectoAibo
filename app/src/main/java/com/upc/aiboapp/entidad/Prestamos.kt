@@ -1,7 +1,8 @@
 package com.upc.aiboapp.entidad
 
-class Prestamos (sueldo:String="", monto:String="", cuotas:String="",
+class Prestamos (dni:String="",sueldo:String="", monto:String="", cuotas:String="",
                  interes:String="", estado:String=""){
+    var dni:String=dni
     var sueldo:String=sueldo
     var monto:String=monto
     var cuotas:String=cuotas

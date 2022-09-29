@@ -16,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import com.upc.aiboapp.entidad.Contrato
 import com.upc.aiboapp.entidad.Prestamos
 import com.upc.aiboapp.entidad.Usuario
 
@@ -103,30 +104,18 @@ class FirebaseStorageManager {
         }
     }
 
-    fun ingresarSolicitudPrestamo(sueldo:String, monto:String, cuotas:String,
+    fun ingresarSolicitudPrestamo(dni: String,sueldo:String, monto:String, cuotas:String,
                                   interes:String, estado:String, context: Context){
         val referencia=db.getReference("prestamos")
 
-        val prestamo = Prestamos(sueldo, monto, cuotas, interes, estado)
+        val prestamo = Prestamos(dni,sueldo, monto, cuotas, interes, estado)
         referencia.child(referencia.push().key.toString()).setValue(prestamo).addOnCompleteListener {
-            mostrarMensajeSolicitud(context)
             val intent = Intent(context, LocalizacionActivity::class.java)
+            intent.putExtra("dni",dni)
             startActivity(context,intent,null)
         }.addOnFailureListener{
             err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
         }
-    }
-
-
-    private fun mostrarMensajeSolicitud(context: Context){
-        val ventana = AlertDialog.Builder(context)
-        ventana.setTitle("Mensaje informativo")
-        ventana.setMessage("Se registro correctamente")
-        ventana.setPositiveButton("Aceptar"){ dialog, which ->
-            val intent = Intent(context, LoginActivity::class.java)
-            startActivity(context,intent,null)
-        }
-        ventana.create().show()
     }
 
     private fun mostrarMensajeRegistro(context: Context){
@@ -157,5 +146,16 @@ class FirebaseStorageManager {
             }
             override fun onCancelled(databaseError: DatabaseError) {}
         })
+    }
+    fun guardarUbicacion(dni:String,latitud:String,longitud:String,context: Context){
+        val referencia=db.getReference("contrato_direccion")
+
+        val contrato=Contrato(dni,latitud,longitud)
+        referencia.child(referencia.push().key.toString()).setValue(contrato).addOnCompleteListener{
+            val intent = Intent(context, SimulacionActivity::class.java)
+            startActivity(context, intent, null)
+        }.addOnFailureListener{
+                err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
+        }
     }
 }

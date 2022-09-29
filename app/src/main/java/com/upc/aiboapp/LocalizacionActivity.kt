@@ -19,11 +19,15 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class LocalizacionActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.OnMyLocationClickListener {
 
+    private lateinit var latitud: String
+    private lateinit var longitud: String
+
     private lateinit var mMap: GoogleMap
     lateinit var mapView: SupportMapFragment
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     private lateinit var confirmarBtnMap: Button
+    var storageManager:  FirebaseStorageManager= FirebaseStorageManager()
 
 
     companion object{
@@ -37,8 +41,10 @@ class LocalizacionActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.On
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         confirmarBtnMap=findViewById(R.id.btnConfirmarMap)
         confirmarBtnMap.setOnClickListener{
-            val intent = Intent(this, SimulacionActivity::class.java)
-            ContextCompat.startActivity(this, intent, null)
+            val dniUser: String? =getIntent().getStringExtra("dni")
+            if (dniUser != null) {
+                storageManager.guardarUbicacion(dniUser,latitud,longitud,this)
+            }
         }
     }
 
@@ -50,6 +56,9 @@ class LocalizacionActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.On
 
     private fun createMarker(location : Location){
         val ubicacion = LatLng(location.latitude, location.longitude)
+        latitud=location.latitude.toString()
+        longitud=location.longitude.toString()
+
         mMap.addMarker(MarkerOptions().position(ubicacion).title("Mi ubicacion"))
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ubicacion,16.0f))
     }

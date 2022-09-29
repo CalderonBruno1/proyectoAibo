@@ -67,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Ingresa tu sueldo bruto en planilla:"
+        android:text="Ingresa monto de prestamo:"
         android:textStyle="bold"
         android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +188,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/cuotaMensual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -208,6 +208,6 @@
         android:text="¡Solicitalo ya!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+        app:layout_constraintTop_toBottomOf="@+id/cuotaMensual" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

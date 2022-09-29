@@ -20,6 +20,7 @@ class SimulacionActivity : AppCompatActivity() {
 
     private lateinit var barCuotas: SeekBar
     private lateinit var txtCuotas: TextView
+    private lateinit var txtCuotaMensual: TextView
 
     private lateinit var btnSolicitarYa: Button
 
@@ -31,6 +32,7 @@ class SimulacionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_simulacion)
 
         txtSueldoPlanilla = findViewById(R.id.txt_SueldoPlanilla)
+        txtCuotaMensual =findViewById(R.id.cuotaMensual)
 
         txtMontoPrestamo = findViewById((R.id.MontoPrestamo))
 
@@ -56,6 +58,7 @@ class SimulacionActivity : AppCompatActivity() {
         barCuotas.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 txtCuotas.setText(progress.toString())
+                txtCuotaMensual.setText((barMontoPrestamo.progress*1.105/progress).toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -86,7 +89,11 @@ class SimulacionActivity : AppCompatActivity() {
         if(sueldo.isEmpty()){
             Toast.makeText(this,"Completar sueldo", Toast.LENGTH_LONG).show()
         }else{
-            storageManager.ingresarSolicitudPrestamo(sueldo, monto, cuotas, interes, estado, this)
+            val dniUser: String? =getIntent().getStringExtra("dni")
+            if (dniUser != null) {
+                storageManager.ingresarSolicitudPrestamo(dniUser,sueldo, monto, cuotas, interes, estado, this)
+            }
+
         }
 
 

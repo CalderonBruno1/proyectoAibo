@@ -3,11 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Escritorio/AIBO/proyectoAibo/app/src/main/res/layout/activity_aceptado.xml" value="0.20675675675675675" />
-        <entry key="..\:/Escritorio/AIBO/proyectoAibo/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
-        <entry key="..\:/Escritorio/AIBO/proyectoAibo/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Escritorio/AIBO/proyectoAibo/app/src/main/res/layout/activity_registrar.xml" value="0.36666666666666664" />
-        <entry key="..\:/Escritorio/AIBO/proyectoAibo/app/src/main/res/layout/activity_simulacion.xml" value="0.33" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/drawable/round_style.xml" value="0.2115" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_aceptado.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_espera.xml" value="0.20416666666666666" />
@@ -15,6 +10,7 @@
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_rechazado.xml" value="0.25" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_registrar.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/BRUNO/AndroidStudioProjects/upc/Aiboapp2/app/src/main/res/layout/activity_validar_registro.xml" value="0.33" />
+        <entry key="..\:/Users/BRUNO/Desktop/Nueva carpeta (2)/proyectoAibo/app/src/main/res/layout/activity_aceptado.xml" value="0.2" />
         <entry key="..\:/Users/BRUNO/Desktop/Nueva carpeta (2)/proyectoAibo/app/src/main/res/layout/activity_localizacion.xml" value="0.2" />
       </map>
     </option>

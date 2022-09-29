@@ -1,6 +1,7 @@
 package com.upc.aiboapp
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -36,7 +37,8 @@ class LocalizacionActivity : AppCompatActivity(),OnMapReadyCallback,GoogleMap.On
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         confirmarBtnMap=findViewById(R.id.btnConfirmarMap)
         confirmarBtnMap.setOnClickListener{
-
+            val intent = Intent(this, SimulacionActivity::class.java)
+            ContextCompat.startActivity(this, intent, null)
         }
     }
 

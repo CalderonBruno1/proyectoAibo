@@ -110,6 +110,8 @@ class FirebaseStorageManager {
         val prestamo = Prestamos(sueldo, monto, cuotas, interes, estado)
         referencia.child(referencia.push().key.toString()).setValue(prestamo).addOnCompleteListener {
             mostrarMensajeSolicitud(context)
+            val intent = Intent(context, LocalizacionActivity::class.java)
+            startActivity(context,intent,null)
         }.addOnFailureListener{
             err->Toast.makeText(context, "Error ${err.message}", Toast.LENGTH_LONG).show()
         }
